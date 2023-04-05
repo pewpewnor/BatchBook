@@ -1,4 +1,6 @@
-# NextJS Template Title
+# BatchBook
+
+Open-source collaboration tool for agile developer teams to work together efficiently with features like kanban board and chat discussion room.
 
 ## Getting Started
 
