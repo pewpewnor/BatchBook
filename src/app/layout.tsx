@@ -2,8 +2,8 @@ import { Children, FC, ReactNode } from "react";
 import "./globals.css";
 
 export const metadata = {
-	title: "NextJS Template Tab Title",
-	description: "NextJS template description metadata",
+	title: "BatchBook",
+	description: "Open-source collaboration tool for agile developer teams to work together efficiently with features like kanban board and chat discussion room",
 };
 
 interface RootLayoutProps {
