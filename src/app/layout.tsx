@@ -1,4 +1,6 @@
-import { Children, FC, ReactNode } from "react";
+import Navbar from "@/components/layouts/Navbar";
+import { Inter } from "next/font/google";
+import { FC, ReactNode } from "react";
 import "./globals.css";
 
 export const metadata = {
@@ -10,11 +12,15 @@ export const metadata = {
 interface RootLayoutProps {
 	children: ReactNode;
 }
+const inter = Inter({ subsets: ["latin"] });
 
 const RootLayout: FC<RootLayoutProps> = (props: RootLayoutProps) => {
 	return (
-		<html lang="en">
-			<body>{props.children}</body>
+		<html lang="en" className={inter.className}>
+			<body className="h-screen">
+				<Navbar />
+				{props.children}
+			</body>
 		</html>
 	);
 };
