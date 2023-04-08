@@ -14,15 +14,21 @@ interface SelectedVariantParameter {
 export default function createVariance(
 	always: string,
 	variants: VariantsParameter
-): (selectedVariant: SelectedVariantParameter) => string {
-	return (selectedVariant: SelectedVariantParameter): string => {
+): (
+	selectedVariant: SelectedVariantParameter,
+	customClassName?: string
+) => string {
+	return (
+		selectedVariant: SelectedVariantParameter,
+		customClassName?: string
+	): string => {
 		const result: string[] = [always];
 
 		// catch error if any specified variant type does not exist
 		for (const selectedVariantType in selectedVariant) {
 			if (!variants[selectedVariantType]) {
 				throw new Error(
-					`selected variant type "${selectedVariantType}" does not exist!`
+					`From variance util -> Selected variant type "${selectedVariantType}" does not exist!`
 				);
 			}
 		}
@@ -36,7 +42,7 @@ export default function createVariance(
 				// if specified value for this variant type is invalid, throw error
 				if (!variant) {
 					throw new Error(
-						`selected variant "${selectedVariant[variantType]}" does not exist in variant type "${variantType}"!`
+						`From variance util -> Selected variant "${selectedVariant[variantType]}" does not exist in variant type "${variantType}"!`
 					);
 				}
 				result.push(variant);
@@ -45,6 +51,11 @@ export default function createVariance(
 			else {
 				result.push(variants[variantType]["default"]);
 			}
+		}
+
+		// if custom className is specified
+		if (customClassName) {
+			result.append(customClassName);
 		}
 
 		return twMerge(result.join(" "));
