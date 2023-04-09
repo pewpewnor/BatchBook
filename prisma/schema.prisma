@@ -7,15 +7,78 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// TODO: THREAD SECTION
+
+// TODO: BOARD SECTION
+
+// CHANNEL SECTION
+
+model ThreadChannel {
+  id        String @id @default(cuid())
+  name      String
+  channelId String
+
+  channel Channel @relation(fields: [channelId], references: [id])
+}
+
+model BoardChannel {
+  id        String @id @default(cuid())
+  name      String
+  channelId String
+
+  channel Channel @relation(fields: [channelId], references: [id])
+}
+
+enum ChannelType {
+  MESSAGE
+  BOARD
+}
+
+model Channel {
+  id               String      @id @default(cuid())
+  name             String
+  type             ChannelType
+  channelSectionId String
+
+  ChannelSection ChannelSection  @relation(fields: [channelSectionId], references: [id])
+  BoardChannel   BoardChannel[]
+  ThreadChannel  ThreadChannel[]
+}
+
+model ChannelSection {
+  id          String @id @default(cuid())
+  workspaceId String
+
+  Workspace Workspace @relation(fields: [workspaceId], references: [id])
+  channels  Channel[]
+}
+
+// WORKSPACE SECTION
+
+model Workspace {
+  id      String @id @default(cuid())
+  name    String
+  ownerId String
+
+  owner           User             @relation("OwnedWorkspaces", fields: [ownerId], references: [id])
+  channelSections ChannelSection[]
+}
+
+// CLIENT SECTION
+
 model User {
+  ownedWorkspaces Workspace[] @relation("OwnedWorkspaces")
+
   // The following properties and relations are used by next-auth, DO NOT CHANGE
+
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  accounts      Account[]
-  sessions      Session[]
+
+  accounts Account[]
+  sessions Session[]
 }
 
 // The following models are used by next-auth, DO NOT CHANGE
@@ -44,7 +107,8 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
