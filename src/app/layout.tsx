@@ -17,7 +17,7 @@ const inter = Inter({ subsets: ["latin"] });
 const RootLayout: FC<RootLayoutProps> = (props: RootLayoutProps) => {
 	return (
 		<html lang="en" className={inter.className}>
-			<body className="h-screen">
+			<body className="h-screen min-h-screen pt-14">
 				<Navbar />
 				{props.children}
 			</body>
