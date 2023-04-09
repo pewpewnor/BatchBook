@@ -14,7 +14,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 		useState<boolean>(false);
 
 	return (
-		<nav className="w-screen flex-col bg-black">
+		<nav className="absolute top-0 w-screen flex-col bg-black">
 			<div className="h-14 flex justify-around items-center">
 				{/* logo container */}
 				<div className="logo flex justify-between items-center gap-x-3">
