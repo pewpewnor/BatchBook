@@ -55,7 +55,7 @@ export default function createVariance(
 
 		// if custom className is specified
 		if (customClassName) {
-			result.append(customClassName);
+			result.push(customClassName);
 		}
 
 		return twMerge(result.join(" "));
