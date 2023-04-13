@@ -15,7 +15,6 @@ datasource db {
 
 model ThreadChannel {
   id        String @id @default(cuid())
-  name      String
   channelId String
 
   channel Channel @relation(fields: [channelId], references: [id])
@@ -23,7 +22,6 @@ model ThreadChannel {
 
 model BoardChannel {
   id        String @id @default(cuid())
-  name      String
   channelId String
 
   channel Channel @relation(fields: [channelId], references: [id])
@@ -47,6 +45,7 @@ model Channel {
 
 model ChannelSection {
   id          String @id @default(cuid())
+  name        String
   workspaceId String
 
   Workspace Workspace @relation(fields: [workspaceId], references: [id])
@@ -56,18 +55,23 @@ model ChannelSection {
 // WORKSPACE SECTION
 
 model Workspace {
-  id      String @id @default(cuid())
-  name    String
-  ownerId String
+  id             String @id @default(cuid())
+  name           String
+  workspaceImage Bytes?
+  ownerId        String
 
   owner           User             @relation("OwnedWorkspaces", fields: [ownerId], references: [id])
   channelSections ChannelSection[]
+  members         User[]           @relation("MemberWorkspaces")
 }
 
 // CLIENT SECTION
 
 model User {
-  ownedWorkspaces Workspace[] @relation("OwnedWorkspaces")
+  inviteId String @unique @default(cuid())
+
+  ownedWorkspaces  Workspace[] @relation("OwnedWorkspaces")
+  memberWorkspaces Workspace[] @relation("MemberWorkspaces")
 
   // The following properties and relations are used by next-auth, DO NOT CHANGE
 
