@@ -23,36 +23,29 @@ class Variance {
 	}
 
 	public getVariant(chosenVariants: ChosenVariants) {
-		// Throw error if any of the chosen variant type does not exist in created variants
-
-		Object.keys(chosenVariants).forEach((chosenVariantType) => {
-			if (!Object.hasOwn(this.createdVariants, chosenVariantType)) {
+		const chosenVariantKeys = Object.keys(chosenVariants);
+		for (const chosenVariantType of chosenVariantKeys) {
+			if (!(chosenVariantType in this.createdVariants)) {
 				throw new Error(
-					`Chosen variant type "${chosenVariantType}" does not exist!`
+					`Error: chosen variant type "${chosenVariantType}" does not exist. File: variance.ts, Line: 31`
 				);
 			}
-		});
+		}
 
 		const result = [
 			this.always,
-			// Loop for each created variants
-
 			...Object.entries(this.createdVariants).map(
 				([variantType, variant]) => {
-					// If user specify this variant type
-
-					if (Object.hasOwn(chosenVariants, variantType)) {
+					if (variantType in chosenVariants) {
 						const chosenVariantKey = chosenVariants[variantType];
-						if (Object.hasOwn(variant, chosenVariantKey)) {
+						if (chosenVariantKey in variant) {
 							return variant[chosenVariantKey];
 						} else {
 							throw new Error(
-								`Chosen variant "${chosenVariantKey}" does not exist in variant type "${variantType}"!`
+								`Error: chosen variant key "${chosenVariantKey}" does not exist in variant type "${variantType}". File: variance.ts, Line: 50`
 							);
 						}
 					}
-					// If user did not specify this variant type, use the default property value
-
 					return variant.default;
 				}
 			),
