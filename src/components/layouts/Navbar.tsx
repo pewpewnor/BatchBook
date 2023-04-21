@@ -47,7 +47,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
 				{/* Right bar */}
 				<div className="flex justify-between align-middle">
-					<MdAccountBox className="w-9 h-9" />
+					<MdAccountBox className="w-9 h-9 cursor-pointer" />
 				</div>
 			</div>
 
