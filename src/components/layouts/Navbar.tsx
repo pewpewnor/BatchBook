@@ -16,7 +16,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 	return (
 		<nav className="absolute top-0 w-screen flex-col bg-black">
 			<div className="h-14 flex justify-around items-center">
-				{/* logo container */}
+				{/* Logo container */}
 				<div className="logo flex justify-between items-center gap-x-3">
 					<Image
 						src="/batchbook-logo.svg"
@@ -27,7 +27,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 					<h1 className="text-2xl font-bold">Batchbook</h1>
 				</div>
 
-				{/* navigation links */}
+				{/* Navigation links */}
 				<div className="hidden md:block">
 					<div className="links flex justify-between items-center gap-x-12 lg:gap-x-14">
 						<Link href="/workspaces">Workspaces</Link>
@@ -45,11 +45,13 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 					}}
 				/>
 
-				{/* right bar */}
+				{/* Right bar */}
 				<div className="flex justify-between align-middle">
 					<MdAccountBox className="w-9 h-9" />
 				</div>
 			</div>
+
+			{/* Dropdown navbar menu for mobile responsive view */}
 			{showNavbarDropdown && (
 				<div className="absolute right-4 mt-2 py-2 w-48 bg-shade-blue bg-opacity-75 backdrop-blur-lg rounded-md shadow-lg z-10">
 					<Link
