@@ -1,70 +1,57 @@
-import Navbar from "@/components/layouts/Navbar";
+"use client";
 import ChannelSection from "@/components/workspace/ChannelSection";
-import prisma from "@/lib/database/prisma";
-import { Prisma } from "@prisma/client";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { WorkspaceData } from "@/lib/database/workspace-type";
 import { notFound } from "next/navigation";
-import { resourceUsage } from "process";
-import { FC } from "react";
-
-type WorkspaceQuery = Prisma.WorkspaceGetPayload<{
-	include: {
-		members: true;
-		channelSections: {
-			select: {
-				id: true;
-				name: true;
-				channels: {
-					select: {
-						id: true;
-						name: true;
-						type: true;
-					};
-				};
-			};
-		};
-	};
-}>;
-
-async function getWorkspace(workspaceId: string): Promise<WorkspaceQuery> {
-	try {
-		const workspace = await prisma.workspace.findUnique({
-			where: {
-				id: workspaceId,
-			},
-			include: {
-				members: true,
-				channelSections: {
-					select: {
-						id: true,
-						name: true,
-						channels: {
-							select: {
-								id: true,
-								name: true,
-								type: true,
-							},
-						},
-					},
-				},
-			},
-		});
-		if (!workspace) {
-			notFound();
-		}
-		return workspace;
-	} catch (e: unknown) {
-		notFound();
-	}
-}
+import { FC, useEffect, useState } from "react";
 
 interface WorkspaceProps {
-	params: Params;
+	params: {
+		workspaceId: string;
+	};
 }
 
-/* @ts-expect-error Async Server Component */
-const Workspace: FC<WorkspaceProps> = async (props: WorkspaceProps) => {
-	const workspace = await getWorkspace(props.params.workspaceId);
+const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
+	const [workspace, setWorkspace] = useState<WorkspaceData | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		async function fetchWorkspace(workspaceId: string) {
+			try {
+				const response = await fetch(
+					`/api/workspace?workspaceId=${workspaceId}`,
+					{
+						method: "GET",
+						cache: "no-store",
+						next: {
+							revalidate: 5,
+						},
+					}
+				);
+				if (!response.ok) {
+					throw new Error(
+						"Error: Failed to fetch data, possibly invalid API URL\nLocation: /workspace/[workspaceId]/page.tsx"
+					);
+				}
+
+				const data = (await response.json()) as WorkspaceData | null;
+
+				setWorkspace(data);
+				setIsLoading(false);
+			} catch (error: unknown) {
+				console.error(error);
+			}
+		}
+
+		fetchWorkspace(props.params.workspaceId);
+	}, [props.params.workspaceId]);
+
+	if (isLoading) {
+		return <p>Loading...</p>;
+	}
+
+	if (!workspace) {
+		notFound();
+	}
 
 	return (
 		<div className="flex flex-row items-stretch">
@@ -74,12 +61,13 @@ const Workspace: FC<WorkspaceProps> = async (props: WorkspaceProps) => {
 					return (
 						<ChannelSection
 							key={channelSection.id}
-							name={channelSection.name}
+							{...channelSection}
 						/>
 					);
 				})}
 			</div>
-			{/* Main conent */}
+
+			{/* Main content */}
 			<div className="h-full">
 				<pre>{JSON.stringify(workspace, null, 2)}</pre>
 			</div>
