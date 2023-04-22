@@ -35,9 +35,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 				}
 
 				const data = (await response.json()) as WorkspaceData | null;
-				if (data) {
-					setWorkspace(data);
-				}
+				setWorkspace(data);
 				setIsLoading(false);
 			} catch (error: unknown) {
 				console.error(error);
