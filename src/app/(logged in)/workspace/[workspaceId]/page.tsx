@@ -4,6 +4,7 @@ import ChannelSection from "@/components/workspace/ChannelSection";
 import { WorkspaceData } from "@/lib/database/workspace-type";
 import { notFound } from "next/navigation";
 import { FC, useEffect, useState } from "react";
+import { assert } from "ts-essentials";
 
 interface WorkspaceProps {
 	params: {
@@ -34,8 +35,14 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 					);
 				}
 
-				const data = (await response.json()) as WorkspaceData | null;
-				setWorkspace(data);
+				const data = await response.json();
+				assert(
+					data === null || (data as WorkspaceData),
+					"returned data from API must be either be null or compatible with type WorkspaceData"
+				);
+				const workspace = data as WorkspaceData | null;
+
+				setWorkspace(workspace);
 				setIsLoading(false);
 			} catch (error: unknown) {
 				console.error(error);
