@@ -1,5 +1,7 @@
 import prisma from "@/lib/database/prisma";
+import { WorkspaceData } from "@/lib/database/workspace-type";
 import { NextRequest, NextResponse } from "next/server";
+import { assert } from "ts-essentials";
 
 interface GetParams {
 	workspaceId?: string;
@@ -14,6 +16,8 @@ export async function GET(request: NextRequest) {
 	} catch (error: unknown) {
 		throw new Error("Error: GET parameters are missing and not given.");
 	}
+
+	assert(params.workspaceId, "workspaceId from params must not be null");
 
 	const workspace = await prisma.workspace.findUnique({
 		where: {
@@ -30,6 +34,11 @@ export async function GET(request: NextRequest) {
 			},
 		},
 	});
+
+	assert(
+		workspace === null || (workspace as WorkspaceData),
+		"workspace to be returned must be either be null or compatible with type WorkspaceData"
+	);
 
 	return NextResponse.json(workspace);
 }
