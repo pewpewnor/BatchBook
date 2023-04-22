@@ -2,6 +2,7 @@
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ChannelSection from "@/components/workspace/ChannelSection";
 import { WorkspaceData } from "@/lib/database/workspace-type";
+import createErrorMessage from "@/utils/error-message";
 import { notFound } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import { assert } from "ts-essentials";
@@ -31,7 +32,11 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 				);
 				if (!response.ok) {
 					throw new Error(
-						"Error: Failed to fetch data, possibly invalid API URL\nLocation: /workspace/[workspaceId]/page.tsx"
+						createErrorMessage(
+							"/workspace/[workspaceId]/page.tsx",
+							"Workspace component > useEffect > fetchWorkspace",
+							"Error while fetching API where the response is not OK, probably caused by invalid API GET query parameters / API error"
+						)
 					);
 				}
 
