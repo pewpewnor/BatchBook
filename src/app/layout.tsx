@@ -1,6 +1,6 @@
 import Navbar from "@/components/layouts/Navbar";
-import { Inter } from "next/font/google";
 import { FC, ReactNode } from "react";
+import "server-only";
 import "./globals.css";
 
 export const metadata = {
@@ -12,15 +12,11 @@ export const metadata = {
 interface RootLayoutProps {
 	children: ReactNode;
 }
-const inter = Inter({ subsets: ["latin"] });
 
 const RootLayout: FC<RootLayoutProps> = (props: RootLayoutProps) => {
 	return (
-		<html lang="en" className={inter.className}>
-			<body className="h-screen min-h-screen pt-14 bg-gradient-to-b from-shade-blue to-navy-blue">
-				<Navbar />
-				{props.children}
-			</body>
+		<html lang="en">
+			<body>{props.children}</body>
 		</html>
 	);
 };
