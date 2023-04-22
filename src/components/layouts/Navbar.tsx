@@ -24,7 +24,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 						height="36"
 						alt="logo"
 					/>
-					<h1 className="text-2xl font-bold">Batchbook</h1>
+					<h1 className="text-2xl font-bold">BatchBook</h1>
 				</div>
 
 				{/* Navigation links */}
