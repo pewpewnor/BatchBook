@@ -9,7 +9,7 @@ const LoggedInLayout: FC<LoggedInLayoutProps> = (
 	props: LoggedInLayoutProps
 ) => {
 	return (
-		<div className="relative min-h-screen pt-14 bg-gradient-to-b from-shade-blue to-navy-blue">
+		<div className="h-screen pt-14 bg-gradient-to-b from-shade-blue to-navy-blue">
 			<Navbar />
 			{props.children}
 		</div>
