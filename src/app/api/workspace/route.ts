@@ -1,5 +1,4 @@
 import prisma from "@/lib/database/prisma";
-import { WorkspaceData } from "@/lib/database/workspace-type";
 import { NextRequest, NextResponse } from "next/server";
 
 interface GetParams {
@@ -16,7 +15,7 @@ export async function GET(request: NextRequest) {
 		throw new Error("Error: GET parameters are missing and not given.");
 	}
 
-	const workspace: WorkspaceData | null = await prisma.workspace.findUnique({
+	const workspace = await prisma.workspace.findUnique({
 		where: {
 			id: params.workspaceId,
 		},
