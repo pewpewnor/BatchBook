@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ChannelSection from "@/components/workspace/ChannelSection";
 import { WorkspaceData } from "@/lib/database/workspace-type";
 import { notFound } from "next/navigation";
@@ -47,7 +48,12 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	}, [props.params.workspaceId]);
 
 	if (isLoading) {
-		return <p>Loading...</p>;
+		return (
+			<div className="h-full flex justify-center items-center">
+				<LoadingSpinner />
+				<p className="text-xl">Loading...</p>
+			</div>
+		);
 	}
 
 	if (!workspace) {
