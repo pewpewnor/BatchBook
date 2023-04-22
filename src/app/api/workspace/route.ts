@@ -1,5 +1,6 @@
 import prisma from "@/lib/database/prisma";
 import { WorkspaceData } from "@/lib/database/workspace-type";
+import createErrorMessage from "@/utils/error-message";
 import { NextRequest, NextResponse } from "next/server";
 import { assert } from "ts-essentials";
 
@@ -14,7 +15,13 @@ export async function GET(request: NextRequest) {
 			request.nextUrl.searchParams.entries()
 		) as GetParams;
 	} catch (error: unknown) {
-		throw new Error("Error: GET parameters are missing and not given.");
+		throw new Error(
+			createErrorMessage(
+				"Location: /api/workspace/route.ts",
+				"GET method",
+				"API GET query parameters are missing from a specific API caller"
+			)
+		);
 	}
 
 	assert(params.workspaceId, "workspaceId from params must not be null");
