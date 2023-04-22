@@ -1,4 +1,3 @@
-import Navbar from "@/components/layouts/Navbar";
 import { FC, ReactNode } from "react";
 import "server-only";
 import "./globals.css";
