@@ -66,9 +66,9 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	}
 
 	return (
-		<div className="flex flex-row items-stretch">
+		<div className="h-full flex flex-row items-stretch">
 			{/* Channel Sidebar */}
-			<div className="min-h-screen bg-shade-blue bg-opacity-75 backdrop-blur-lg shadow-lg w-56">
+			<div className="h-full bg-shade-blue bg-opacity-75 backdrop-blur-lg shadow-lg w-56">
 				{workspace.channelSections.map((channelSection) => {
 					return (
 						<ChannelSection
