@@ -1,9 +1,8 @@
 "use client";
+import { ChannelSectionData } from "@/lib/database/workspace-type";
 import { FC } from "react";
 
-interface ChannelSectionProps {
-	name: string;
-}
+interface ChannelSectionProps extends ChannelSectionData {}
 
 const ChannelSection: FC<ChannelSectionProps> = (
 	props: ChannelSectionProps
