@@ -41,6 +41,9 @@ model Channel {
   ChannelSection ChannelSection  @relation(fields: [channelSectionId], references: [id])
   BoardChannel   BoardChannel[]
   ThreadChannel  ThreadChannel[]
+
+  // Maybe for later features once error message box is added:
+  // @@unique([channelSectionId, name, type])
 }
 
 model ChannelSection {
