@@ -35,7 +35,10 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 						createErrorMessage(
 							"/workspace/[workspaceId]/page.tsx",
 							"Workspace component > useEffect > fetchWorkspace",
-							"Error while fetching API where the response is not OK, probably caused by invalid API GET query parameters / API error"
+							"Error while fetching API, probably caused by either:",
+							"1. Server database is down",
+							"2. Invalid API GET query parameters",
+							"3. API error maybe due to failure connecting to database"
 						)
 					);
 				}
