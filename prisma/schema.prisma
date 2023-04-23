@@ -9,23 +9,23 @@ datasource db {
 
 // TODO: THREAD SECTION
 
-// TODO: BOARD SECTION
-
-// CHANNEL SECTION
-
 model ThreadChannel {
   id        String @id @default(cuid())
-  channelId String
+  channelId String @unique
 
   channel Channel @relation(fields: [channelId], references: [id])
 }
+
+// TODO: BOARD SECTION
 
 model BoardChannel {
   id        String @id @default(cuid())
-  channelId String
+  channelId String @unique
 
   channel Channel @relation(fields: [channelId], references: [id])
 }
+
+// CHANNEL SECTION
 
 enum ChannelType {
   MESSAGE
@@ -38,9 +38,10 @@ model Channel {
   type             ChannelType
   channelSectionId String
 
-  ChannelSection ChannelSection  @relation(fields: [channelSectionId], references: [id])
-  BoardChannel   BoardChannel[]
-  ThreadChannel  ThreadChannel[]
+  channelSection ChannelSection @relation(fields: [channelSectionId], references: [id])
+
+  BoardChannel  BoardChannel?
+  ThreadChannel ThreadChannel?
 
   // Maybe for later features once error message box is added:
   // @@unique([channelSectionId, name, type])
@@ -51,7 +52,7 @@ model ChannelSection {
   name        String
   workspaceId String
 
-  Workspace Workspace @relation(fields: [workspaceId], references: [id])
+  workspace Workspace @relation(fields: [workspaceId], references: [id])
   channels  Channel[]
 }
 
