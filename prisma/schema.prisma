@@ -28,7 +28,7 @@ model BoardChannel {
 // CHANNEL SECTION
 
 enum ChannelType {
-  MESSAGE
+  THREAD
   BOARD
 }
 
