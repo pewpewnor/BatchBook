@@ -15,7 +15,7 @@ interface WorkspaceProps {
 
 const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	const [workspace, setWorkspace] = useState<WorkspaceData | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		async function fetchWorkspace(workspaceId: string) {
