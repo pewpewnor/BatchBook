@@ -10,8 +10,11 @@ import SearchBar from "../ui/SearchBar";
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
-	const [showNavbarDropdown, setShowNavbarDropdown] =
-		useState<boolean>(false);
+	const [showDropdown, setShowDropdown] = useState<boolean>(false);
+
+	function handleDropdown() {
+		setShowDropdown((prev) => !prev);
+	}
 
 	return (
 		<nav className="absolute top-0 w-screen flex-col bg-black">
@@ -40,9 +43,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
 				<FaBars
 					className="block md:hidden w-6 h-6 cursor-pointer active:fill-slate-300"
-					onClick={() => {
-						setShowNavbarDropdown((prev) => !prev);
-					}}
+					onClick={handleDropdown}
 				/>
 
 				{/* Right bar */}
@@ -52,7 +53,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 			</div>
 
 			{/* Dropdown navbar menu for mobile responsive view */}
-			{showNavbarDropdown && (
+			{showDropdown && (
 				<div className="absolute right-4 mt-2 py-2 w-48 bg-shade-blue bg-opacity-75 backdrop-blur-lg rounded-md shadow-lg z-10">
 					<Link
 						href="/workspaces"
