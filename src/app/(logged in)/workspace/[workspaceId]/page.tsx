@@ -5,6 +5,7 @@ import { WorkspaceData } from "@/lib/database/workspace-type";
 import createErrorMessage from "@/utils/error-message";
 import { notFound } from "next/navigation";
 import { FC, useEffect, useState } from "react";
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import { assert } from "ts-essentials";
 
 interface WorkspaceProps {
@@ -16,6 +17,7 @@ interface WorkspaceProps {
 const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	const [workspace, setWorkspace] = useState<WorkspaceData | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [isChannelSidebarOpen, setIsChannelSidebarOpen] = useState(true);
 
 	useEffect(() => {
 		async function fetchWorkspace(workspaceId: string) {
@@ -60,6 +62,10 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 		fetchWorkspace(props.params.workspaceId);
 	}, [props.params.workspaceId]);
 
+	const toggleChannelSidebarCollapse = () => {
+		setIsChannelSidebarOpen((prev) => !prev);
+	};
+
 	if (isLoading) {
 		return (
 			<div className="flex h-full items-center justify-center">
@@ -74,17 +80,39 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	}
 
 	return (
-		<div className="flex h-full flex-row items-stretch">
+		<div className="relative flex h-full flex-row">
 			{/* Channel Sidebar */}
-			<div className="h-full w-56 bg-shade-blue bg-opacity-75 shadow-lg backdrop-blur-lg">
-				{workspace.channelSections.map((channelSection) => {
-					return (
-						<ChannelSection
-							key={channelSection.id}
-							{...channelSection}
-						/>
-					);
-				})}
+			<div
+				className={`relative h-full border-0 bg-shade-blue bg-opacity-75 pt-1 shadow-lg ${
+					isChannelSidebarOpen ? "w-56" : "w-0"
+				}`}
+			>
+				<div className={isChannelSidebarOpen ? "block" : "hidden"}>
+					{workspace.channelSections.map((channelSection) => {
+						return (
+							<ChannelSection
+								key={channelSection.id}
+								{...channelSection}
+							/>
+						);
+					})}
+				</div>
+				{isChannelSidebarOpen && (
+					<div
+						className="absolute right-[-1.25rem] top-1/2 block rounded-2xl bg-black p-2 md:hidden"
+						onClick={toggleChannelSidebarCollapse}
+					>
+						<AiOutlineDoubleLeft />
+					</div>
+				)}
+				{!isChannelSidebarOpen && (
+					<div
+						className="absolute left-2 top-1/2 block rounded-2xl bg-black p-2 md:hidden"
+						onClick={toggleChannelSidebarCollapse}
+					>
+						<AiOutlineDoubleRight />
+					</div>
+				)}
 			</div>
 
 			{/* Main content */}
