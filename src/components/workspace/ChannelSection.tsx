@@ -17,10 +17,10 @@ const ChannelSection: FC<ChannelSectionProps> = (
 
 	return (
 		<>
-			<div className="bg-shade-blue flex justify-between pl-2 pr-4 my-2">
+			<div className="my-2 flex justify-between bg-shade-blue pl-2 pr-4">
 				{/* Left section */}
 				<div
-					className="flex gap-x-2 items-center group"
+					className="group flex items-center gap-x-2"
 					onClick={handleDropdown}
 				>
 					{dropdown ? <BsCaretDownFill /> : <BsCaretDown />}

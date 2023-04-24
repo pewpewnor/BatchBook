@@ -4,10 +4,10 @@ interface NotFoundProps {}
 
 const NotFound: FC<NotFoundProps> = (props: NotFoundProps) => {
 	return (
-		<div className="h-full bg-shade-blue x-4 flex flex-col md:flex-row justify-center items-center space-x-0 md:space-x-6 space-y-8 md:space-y-0">
+		<div className="x-4 flex h-full flex-col items-center justify-center space-x-0 space-y-8 bg-shade-blue md:flex-row md:space-x-6 md:space-y-0">
 			<h1 className="text-6xl font-bold">404</h1>
-			<ol className="text-left flex-row space-y-2 sm:pl-6 sm:border-l-4 border-black">
-				<p className="font-bold text-md md:text-lg">
+			<ol className="flex-row space-y-2 border-black text-left sm:border-l-4 sm:pl-6">
+				<p className="text-md font-bold md:text-lg">
 					Page not found, this means either:
 				</p>
 				<li className="text-md md:text-lg">
