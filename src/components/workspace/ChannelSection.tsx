@@ -9,21 +9,26 @@ interface ChannelSectionProps extends ChannelSectionData {}
 const ChannelSection: FC<ChannelSectionProps> = (
 	props: ChannelSectionProps
 ) => {
-	const [dropdown, setDropdown] = useState<boolean>(true);
+	const [channelSectionDropdown, setChannelSectionDropdown] =
+		useState<boolean>(true);
 
-	function handleDropdown() {
-		setDropdown((prev) => !prev);
+	function toggleChannelSectionDropdown() {
+		setChannelSectionDropdown((prev) => !prev);
 	}
 
 	return (
 		<>
-			<div className="my-2 flex justify-between bg-shade-blue pl-2 pr-4">
+			<div className="group my-2 flex justify-between bg-shade-blue py-1 pl-2 pr-4 hover:bg-light-shade-blue">
 				{/* Left section */}
 				<div
-					className="group flex items-center gap-x-2"
-					onClick={handleDropdown}
+					className="flex items-center gap-x-2 pr-2"
+					onClick={toggleChannelSectionDropdown}
 				>
-					{dropdown ? <BsCaretDownFill /> : <BsCaretDown />}
+					{channelSectionDropdown ? (
+						<BsCaretDownFill />
+					) : (
+						<BsCaretDown />
+					)}
 					<p className="text-sm group-hover:font-bold">
 						{props.name}
 					</p>
@@ -35,7 +40,7 @@ const ChannelSection: FC<ChannelSectionProps> = (
 			</div>
 
 			{/* Dropdown channels that belongs to this channel section */}
-			{dropdown && (
+			{channelSectionDropdown && (
 				<div className="flex flex-col">
 					{props.channels.map((channel) => (
 						<Channel key={channel.id} {...channel} />
