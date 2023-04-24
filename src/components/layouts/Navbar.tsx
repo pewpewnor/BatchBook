@@ -18,9 +18,9 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
 	return (
 		<nav className="absolute top-0 w-screen flex-col bg-black">
-			<div className="h-14 flex justify-around items-center">
+			<div className="flex h-14 items-center justify-around">
 				{/* Logo container */}
-				<div className="logo flex justify-between items-center gap-x-3">
+				<div className="logo flex items-center justify-between gap-x-3">
 					<Image
 						src="/batchbook-logo.svg"
 						width="36"
@@ -32,7 +32,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
 				{/* Navigation links */}
 				<div className="hidden md:block">
-					<div className="links flex justify-between items-center gap-x-12 lg:gap-x-14">
+					<div className="links flex items-center justify-between gap-x-12 lg:gap-x-14">
 						<Link href="/workspaces">Workspaces</Link>
 						<Link href="/messages">Messages</Link>
 						<Link href="/tasks">Tasks</Link>
@@ -42,28 +42,28 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 				<SearchBar />
 
 				<FaBars
-					className="block md:hidden w-6 h-6 cursor-pointer active:fill-slate-300"
+					className="block h-6 w-6 cursor-pointer active:fill-slate-300 md:hidden"
 					onClick={handleDropdown}
 				/>
 
 				{/* Right bar */}
 				<div className="flex justify-between align-middle">
-					<MdAccountBox className="w-9 h-9 cursor-pointer" />
+					<MdAccountBox className="h-9 w-9 cursor-pointer" />
 				</div>
 			</div>
 
 			{/* Dropdown navbar menu for mobile responsive view */}
 			{showDropdown && (
-				<div className="absolute right-4 mt-2 py-2 w-48 bg-shade-blue bg-opacity-75 backdrop-blur-lg rounded-md shadow-lg z-10">
+				<div className="absolute right-4 z-10 mt-2 w-48 rounded-md bg-shade-blue bg-opacity-75 py-2 shadow-lg backdrop-blur-lg">
 					<Link
 						href="/workspaces"
-						className="block px-4 py-4 text-sm text-slate-100 active:bg-light-shade-blue border-b-2 border-black"
+						className="block border-b-2 border-black px-4 py-4 text-sm text-slate-100 active:bg-light-shade-blue"
 					>
 						Workspaces
 					</Link>
 					<Link
 						href="/messages"
-						className="block px-4 py-4 text-sm text-slate-100 active:bg-light-shade-blue border-b-2 border-black"
+						className="block border-b-2 border-black px-4 py-4 text-sm text-slate-100 active:bg-light-shade-blue"
 					>
 						Messages
 					</Link>

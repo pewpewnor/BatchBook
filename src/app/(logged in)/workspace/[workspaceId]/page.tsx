@@ -62,7 +62,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 
 	if (isLoading) {
 		return (
-			<div className="h-full flex justify-center items-center">
+			<div className="flex h-full items-center justify-center">
 				<LoadingSpinner />
 				<p className="text-xl">Loading...</p>
 			</div>
@@ -74,9 +74,9 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	}
 
 	return (
-		<div className="h-full flex flex-row items-stretch">
+		<div className="flex h-full flex-row items-stretch">
 			{/* Channel Sidebar */}
-			<div className="h-full bg-shade-blue bg-opacity-75 backdrop-blur-lg shadow-lg w-56">
+			<div className="h-full w-56 bg-shade-blue bg-opacity-75 shadow-lg backdrop-blur-lg">
 				{workspace.channelSections.map((channelSection) => {
 					return (
 						<ChannelSection

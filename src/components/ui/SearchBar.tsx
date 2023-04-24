@@ -7,14 +7,14 @@ interface SearchBarProps {}
 
 const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
 	return (
-		<div className="sm:relative flex justify-between">
+		<div className="flex justify-between sm:relative">
 			<input
 				type="text"
 				placeholder="Search ..."
-				className="hidden sm:block bg-shade-blue rounded-2xl h-9 px-5 w-[30vw] md:w-[20vw]"
+				className="hidden h-9 w-[30vw] rounded-2xl bg-shade-blue px-5 sm:block md:w-[20vw]"
 			/>
-			<div className="sm:absolute sm:inset-y-0 sm:right-1 sm:rounded-r-2xl flex items-center px-3 cursor-pointer">
-				<GoSearch className="w-5 h-5 fill-white" />
+			<div className="flex cursor-pointer items-center px-3 sm:absolute sm:inset-y-0 sm:right-1 sm:rounded-r-2xl">
+				<GoSearch className="h-5 w-5 fill-white" />
 			</div>
 		</div>
 	);

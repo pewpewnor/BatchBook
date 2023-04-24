@@ -7,7 +7,7 @@ interface ChannelProps extends ChannelData {}
 
 const Channel: FC<ChannelProps> = (props: ChannelProps) => {
 	return (
-		<div className="bg-shade-blue flex justify-between mx-2 pl-6 pr-2 py-1 mb-1 rounded-md hover:bg-light-shade-blue">
+		<div className="mx-2 mb-1 flex justify-between rounded-md bg-shade-blue py-1 pl-6 pr-2 hover:bg-light-shade-blue">
 			{/* Left section */}
 			<div className="flex items-center gap-x-2">
 				<HiHashtag />
