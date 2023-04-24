@@ -29,7 +29,7 @@ const ChannelSection: FC<ChannelSectionProps> = (
 					) : (
 						<BsCaretDown />
 					)}
-					<p className="text-sm group-hover:font-bold">
+					<p className="text-sm text-slate-300 group-hover:font-bold">
 						{props.name}
 					</p>
 				</div>
