@@ -13,6 +13,7 @@ const Channel: FC<ChannelProps> = (props: ChannelProps) => {
 				<HiHashtag />
 				{props.name}
 			</div>
+
 			{/* Right section */}
 			<div className="flex items-center gap-x-2">
 				<CiSettings />
