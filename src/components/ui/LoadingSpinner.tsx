@@ -1,10 +1,6 @@
 import { FC } from "react";
 
-interface LoadingSpinnerProps {}
-
-const LoadingSpinner: FC<LoadingSpinnerProps> = (
-	props: LoadingSpinnerProps
-) => {
+const LoadingSpinner: FC<{}> = () => {
 	return (
 		<div role="status">
 			<svg
