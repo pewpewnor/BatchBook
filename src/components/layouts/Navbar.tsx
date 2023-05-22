@@ -28,15 +28,32 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 						height="36"
 						alt="logo"
 					/>
-					<h1 className="text-2xl font-bold">BatchBook</h1>
+					<h1 className="select-none text-2xl font-bold">
+						BatchBook
+					</h1>
 				</div>
 
 				{/* Navigation links */}
 				<div className="hidden md:block">
 					<div className="links flex items-center justify-between gap-x-12 lg:gap-x-14">
-						<Link href="/workspaces">Workspaces</Link>
-						<Link href="/messages">Messages</Link>
-						<Link href="/tasks">Tasks</Link>
+						<Link
+							href="/workspaces"
+							className="font-bold hover:text-slate-400"
+						>
+							Workspaces
+						</Link>
+						<Link
+							href="/messages"
+							className="font-bold hover:text-slate-400"
+						>
+							Messages
+						</Link>
+						<Link
+							href="/tasks"
+							className="font-bold hover:text-slate-400"
+						>
+							Tasks
+						</Link>
 					</div>
 				</div>
 
