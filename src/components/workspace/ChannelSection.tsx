@@ -18,12 +18,12 @@ const ChannelSection: FC<ChannelSectionProps> = (
 
 	return (
 		<>
-			<div className="group my-2 flex justify-between bg-shade-blue py-1 pl-2 pr-4 hover:bg-light-shade-blue">
+			<div
+				className="group my-2 flex select-none justify-between bg-shade-blue py-1 pl-2 pr-4 hover:bg-light-shade-blue"
+				onClick={toggleChannelSectionDropdown}
+			>
 				{/* Left section */}
-				<div
-					className="flex items-center gap-x-2 pr-2"
-					onClick={toggleChannelSectionDropdown}
-				>
+				<div className="flex items-center gap-x-2 pr-2">
 					{channelSectionDropdown ? (
 						<BsCaretDownFill />
 					) : (
@@ -33,6 +33,7 @@ const ChannelSection: FC<ChannelSectionProps> = (
 						{props.name}
 					</p>
 				</div>
+
 				{/* Right section */}
 				<div className="flex items-center gap-x-2">
 					<BsPlusLg />
