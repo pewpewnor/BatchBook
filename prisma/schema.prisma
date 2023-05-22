@@ -17,7 +17,6 @@ model ThreadChannel {
 }
 
 // TODO: BOARD SECTION
-
 model BoardChannel {
   id        String @id @default(cuid())
   channelId String @unique
@@ -39,9 +38,8 @@ model Channel {
   channelSectionId String
 
   channelSection ChannelSection @relation(fields: [channelSectionId], references: [id])
-
-  BoardChannel  BoardChannel?
-  ThreadChannel ThreadChannel?
+  boardChannel   BoardChannel?
+  threadChannel  ThreadChannel?
 
   // Maybe for later features once error message box is added:
   // @@unique([channelSectionId, name, type])

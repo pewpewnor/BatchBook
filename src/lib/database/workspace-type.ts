@@ -12,8 +12,8 @@ type WorkspaceData = Prisma.WorkspaceGetPayload<{
 						id: true;
 						name: true;
 						type: true;
-						BoardChannel: true;
-						ThreadChannel: true;
+						boardChannel: true;
+						threadChannel: true;
 					};
 				};
 			};
@@ -30,8 +30,8 @@ type ChannelSectionData = Prisma.ChannelSectionGetPayload<{
 				id: true;
 				name: true;
 				type: true;
-				BoardChannel: true;
-				ThreadChannel: true;
+				boardChannel: true;
+				threadChannel: true;
 			};
 		};
 	};
@@ -42,8 +42,8 @@ type ChannelData = Prisma.ChannelGetPayload<{
 		id: true;
 		name: true;
 		type: true;
-		BoardChannel: true;
-		ThreadChannel: true;
+		boardChannel: true;
+		threadChannel: true;
 	};
 }>;
 
