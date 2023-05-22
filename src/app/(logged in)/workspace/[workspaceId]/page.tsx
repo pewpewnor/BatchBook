@@ -79,8 +79,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	if (isError) {
 		return (
 			<div className="flex h-full items-center justify-center">
-				<LoadingSpinner />
-				<p className="text-xl">Error While Fethcing</p>
+				<p className="text-xl">Error While Fetching Data</p>
 			</div>
 		);
 	}
