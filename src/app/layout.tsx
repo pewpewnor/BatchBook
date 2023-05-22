@@ -1,5 +1,6 @@
 import { FC, ReactNode } from "react";
 import "server-only";
+import ContextProvider from "./ContextProvider";
 import "./globals.css";
 
 export const metadata = {
@@ -15,7 +16,9 @@ interface RootLayoutProps {
 const RootLayout: FC<RootLayoutProps> = (props: RootLayoutProps) => {
 	return (
 		<html lang="en">
-			<body>{props.children}</body>
+			<body>
+				<ContextProvider>{props.children}</ContextProvider>
+			</body>
 		</html>
 	);
 };
