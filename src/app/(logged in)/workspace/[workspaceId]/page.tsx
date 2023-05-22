@@ -4,7 +4,7 @@ import ChannelSection from "@/components/workspace/ChannelSection";
 import { WorkspaceData } from "@/lib/database/workspace-type";
 import createErrorMessage from "@/utils/error-message";
 import { notFound } from "next/navigation";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { assert } from "ts-essentials";
