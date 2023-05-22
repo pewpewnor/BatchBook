@@ -6,6 +6,7 @@ import createErrorMessage from "@/utils/error-message";
 import { notFound } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
+import { useQuery } from "react-query";
 import { assert } from "ts-essentials";
 
 interface WorkspaceProps {
@@ -15,52 +16,52 @@ interface WorkspaceProps {
 }
 
 const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
-	const [workspace, setWorkspace] = useState<WorkspaceData | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [isChannelSidebarOpen, setIsChannelSidebarOpen] = useState(true);
 
-	useEffect(() => {
-		async function fetchWorkspace(workspaceId: string) {
-			try {
-				const response = await fetch(
-					`/api/workspace?workspaceId=${workspaceId}`,
-					{
-						method: "GET",
-						cache: "no-store",
-						next: {
-							revalidate: 5,
-						},
-					}
-				);
-				if (!response.ok) {
-					throw new Error(
-						createErrorMessage(
-							"/workspace/[workspaceId]/page.tsx",
-							"Workspace component > useEffect > fetchWorkspace",
-							"Error while fetching API, probably caused by either:",
-							"1. Server database is down",
-							"2. Invalid API GET query parameters",
-							"3. API error maybe due to failure connecting to database"
-						)
-					);
+	const {
+		data: workspace,
+		isLoading,
+		isError,
+	} = useQuery<WorkspaceData | null>(
+		["workspace", props.params.workspaceId],
+		async () => {
+			console.log("fetching workspace...");
+			const response = await fetch(
+				`/api/workspace?workspaceId=${props.params.workspaceId}`,
+				{
+					method: "GET",
+					cache: "no-store",
 				}
+			);
 
-				const data = await response.json();
-				assert(
-					data === null || (data as WorkspaceData),
-					"returned data from API must be either be null or compatible with type WorkspaceData"
+			if (!response.ok) {
+				throw new Error(
+					createErrorMessage(
+						"/workspace/[workspaceId]/page.tsx",
+						"Workspace component > useEffect > fetchWorkspace",
+						"Error while fetching API, probably caused by either:",
+						"1. Server database is down",
+						"2. Invalid API GET query parameters",
+						"3. API error maybe due to failure connecting to database"
+					)
 				);
-				const workspace = data as WorkspaceData | null;
-
-				setWorkspace(workspace);
-				setIsLoading(false);
-			} catch (error: unknown) {
-				console.error(error);
 			}
-		}
 
-		fetchWorkspace(props.params.workspaceId);
-	}, [props.params.workspaceId]);
+			const data = await response.json();
+			assert(
+				data === null || (data as WorkspaceData),
+				"returned data from API must be either be null or compatible with type WorkspaceData"
+			);
+			return data as WorkspaceData | null;
+		},
+		{
+			onError: (error: unknown) => {
+				console.error(error);
+			},
+			cacheTime: 0,
+			staleTime: 5000,
+		}
+	);
 
 	const toggleChannelSidebarCollapse = () => {
 		setIsChannelSidebarOpen((prev) => !prev);
@@ -71,6 +72,15 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 			<div className="flex h-full items-center justify-center">
 				<LoadingSpinner />
 				<p className="text-xl">Loading...</p>
+			</div>
+		);
+	}
+
+	if (isError) {
+		return (
+			<div className="flex h-full items-center justify-center">
+				<LoadingSpinner />
+				<p className="text-xl">Error While Fethcing</p>
 			</div>
 		);
 	}
