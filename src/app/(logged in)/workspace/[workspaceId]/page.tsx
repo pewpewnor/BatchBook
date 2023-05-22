@@ -104,15 +104,15 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 						}
 					)}
 				</div>
-				{isChannelSidebarOpen && (
+
+				{isChannelSidebarOpen ? (
 					<div
 						className="absolute right-[-1.25rem] top-1/2 block rounded-2xl bg-black p-2 md:hidden"
 						onClick={toggleChannelSidebarCollapse}
 					>
 						<AiOutlineDoubleLeft />
 					</div>
-				)}
-				{!isChannelSidebarOpen && (
+				) : (
 					<div
 						className="absolute left-2 top-1/2 block rounded-2xl bg-black p-2 md:hidden"
 						onClick={toggleChannelSidebarCollapse}
