@@ -1,6 +1,7 @@
 "use client";
 import { FC, ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query-devtools";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ const ContextProvider: FC<ContextProviderProps> = (
 		<div>
 			<QueryClientProvider client={queryClient}>
 				{props.children}
+				<ReactQueryDevtools />
 			</QueryClientProvider>
 		</div>
 	);
