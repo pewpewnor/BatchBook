@@ -18,11 +18,7 @@ interface WorkspaceProps {
 const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	const [isChannelSidebarOpen, setIsChannelSidebarOpen] = useState(true);
 
-	const {
-		data: workspace,
-		isLoading,
-		isError,
-	} = useQuery<WorkspaceData | null>(
+	const workspaceQuery = useQuery<WorkspaceData | null>(
 		["workspace", props.params.workspaceId],
 		async () => {
 			console.log("fetching workspace...");
@@ -67,7 +63,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 		setIsChannelSidebarOpen((prev) => !prev);
 	};
 
-	if (isLoading) {
+	if (workspaceQuery.isLoading) {
 		return (
 			<div className="flex h-full items-center justify-center">
 				<LoadingSpinner />
@@ -76,7 +72,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 		);
 	}
 
-	if (isError) {
+	if (workspaceQuery.isError) {
 		return (
 			<div className="flex h-full items-center justify-center">
 				<p className="text-xl">Error While Fetching Data</p>
@@ -84,7 +80,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 		);
 	}
 
-	if (!workspace) {
+	if (!workspaceQuery.data) {
 		notFound();
 	}
 
@@ -97,14 +93,16 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 				}`}
 			>
 				<div className={isChannelSidebarOpen ? "block" : "hidden"}>
-					{workspace.channelSections.map((channelSection) => {
-						return (
-							<ChannelSection
-								key={channelSection.id}
-								{...channelSection}
-							/>
-						);
-					})}
+					{workspaceQuery.data.channelSections.map(
+						(channelSection) => {
+							return (
+								<ChannelSection
+									key={channelSection.id}
+									{...channelSection}
+								/>
+							);
+						}
+					)}
 				</div>
 				{isChannelSidebarOpen && (
 					<div
@@ -126,7 +124,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 
 			{/* Main content */}
 			<div className="h-full">
-				<pre>{JSON.stringify(workspace, null, 2)}</pre>
+				<pre>{JSON.stringify(workspaceQuery.data, null, 2)}</pre>
 			</div>
 		</div>
 	);
