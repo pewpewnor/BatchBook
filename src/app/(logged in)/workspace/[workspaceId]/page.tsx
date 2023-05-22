@@ -63,7 +63,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 		setIsChannelSidebarOpen((prev) => !prev);
 	};
 
-	if (workspaceQuery.isLoading) {
+	if (workspaceQuery.isLoading || workspaceQuery.isFetching) {
 		return (
 			<div className="flex h-full items-center justify-center">
 				<LoadingSpinner />
