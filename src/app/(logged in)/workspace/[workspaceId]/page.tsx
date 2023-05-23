@@ -4,7 +4,7 @@ import SwitchChannelContext from "@/contexts/SwitchChannelContext";
 import ChannelSection from "@/page/workspace/ChannelSection";
 import BoardView from "@/page/workspace/board/BoardView";
 import ThreadView from "@/page/workspace/thread/ThreadView";
-import { getWorkspaceData } from "@/server/workspacepage";
+import { getWorkspaceData } from "@/servacts/workspacepage";
 import { ChannelData, WorkspaceData } from "@/types/workspace-type";
 import { notFound } from "next/navigation";
 import { FC, useState } from "react";
