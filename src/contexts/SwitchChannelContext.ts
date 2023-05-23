@@ -1,4 +1,4 @@
-import { ChannelData } from "@/lib/database/workspace-type";
+import { ChannelData } from "@/server/types/workspace-type";
 import { Dispatch, SetStateAction, createContext } from "react";
 
 const SwitchChannelContext = createContext<
