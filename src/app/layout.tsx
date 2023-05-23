@@ -1,6 +1,6 @@
+import ContextProvider from "@/components/index/ContextProvider";
 import { FC, ReactNode } from "react";
 import "server-only";
-import ContextProvider from "./ContextProvider";
 import "./globals.css";
 
 export const metadata = {
