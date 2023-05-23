@@ -1,5 +1,5 @@
 "use client";
-import Channel from "@/components/workspace/Channel";
+import Channel from "@/page/workspace/Channel";
 import { ChannelSectionData } from "@/types/workspace-type";
 import { FC, useState } from "react";
 import { BsCaretDown, BsCaretDownFill, BsPlusLg } from "react-icons/bs";
