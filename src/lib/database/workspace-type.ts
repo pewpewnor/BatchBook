@@ -4,24 +4,11 @@ type WorkspaceData = Prisma.WorkspaceGetPayload<{
 	include: {
 		members: true;
 		channelSections: {
-			select: {
-				id: true;
-				name: true;
+			include: {
 				channels: {
-					select: {
-						id: true;
-						name: true;
-						type: true;
-						boardChannel: {
-							select: {
-								id: true;
-							};
-						};
-						threadChannel: {
-							select: {
-								id: true;
-							};
-						};
+					include: {
+						boardChannel: true;
+						threadChannel: true;
 					};
 				};
 			};
@@ -30,44 +17,20 @@ type WorkspaceData = Prisma.WorkspaceGetPayload<{
 }>;
 
 type ChannelSectionData = Prisma.ChannelSectionGetPayload<{
-	select: {
-		id: true;
-		name: true;
+	include: {
 		channels: {
-			select: {
-				id: true;
-				name: true;
-				type: true;
-				boardChannel: {
-					select: {
-						id: true;
-					};
-				};
-				threadChannel: {
-					select: {
-						id: true;
-					};
-				};
+			include: {
+				boardChannel: true;
+				threadChannel: true;
 			};
 		};
 	};
 }>;
 
 type ChannelData = Prisma.ChannelGetPayload<{
-	select: {
-		id: true;
-		name: true;
-		type: true;
-		boardChannel: {
-			select: {
-				id: true;
-			};
-		};
-		threadChannel: {
-			select: {
-				id: true;
-			};
-		};
+	include: {
+		boardChannel: true;
+		threadChannel: true;
 	};
 }>;
 

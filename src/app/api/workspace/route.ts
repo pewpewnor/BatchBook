@@ -33,24 +33,11 @@ export async function GET(request: NextRequest) {
 		include: {
 			members: true,
 			channelSections: {
-				select: {
-					id: true,
-					name: true,
+				include: {
 					channels: {
-						select: {
-							id: true,
-							name: true,
-							type: true,
-							boardChannel: {
-								select: {
-									id: true,
-								},
-							},
-							threadChannel: {
-								select: {
-									id: true,
-								},
-							},
+						include: {
+							boardChannel: true,
+							threadChannel: true,
 						},
 					},
 				},
