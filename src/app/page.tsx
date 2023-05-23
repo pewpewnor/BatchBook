@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-interface HomeProps {}
+interface HomePageProps {}
 
-const Home: FC<HomeProps> = (props: HomeProps) => {
-	return <h1>Home</h1>;
+const HomePage: FC<HomePageProps> = (props: HomePageProps) => {
+	return <div>HomePage</div>;
 };
 
-export default Home;
+export default HomePage;
