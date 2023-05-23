@@ -1,6 +1,4 @@
 "use client";
-import BoardPage from "@/components/boardpage/BoardPage";
-import ThreadPage from "@/components/threadpage/ThreadPage";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import SwitchChannelContext from "@/contexts/SwitchChannelContext";
 import ChannelSection from "@/page/workspace/ChannelSection";
@@ -9,6 +7,8 @@ import { notFound } from "next/navigation";
 import { FC, useState } from "react";
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import { useQuery } from "react-query";
+import BoardView from "./board/BoardView";
+import ThreadView from "./thread/ThreadView";
 
 interface WorkspaceProps {
 	workspaceId: string;
@@ -121,9 +121,9 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 						</p>
 					</div>
 				) : currentChannel.boardChannel ? (
-					<BoardPage />
+					<BoardView />
 				) : currentChannel.threadChannel ? (
-					<ThreadPage />
+					<ThreadView />
 				) : (
 					<div className="flex h-full items-center justify-center">
 						<p className="text-lg">
