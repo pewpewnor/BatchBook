@@ -8,7 +8,6 @@ import { FC, useState } from "react";
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import { useQuery } from "react-query";
 import BoardView from "./board/BoardView";
-import { getWorkspaceData } from "./test";
 import ThreadView from "./thread/ThreadView";
 
 interface WorkspaceProps {
