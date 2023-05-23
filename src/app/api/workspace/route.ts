@@ -41,8 +41,16 @@ export async function GET(request: NextRequest) {
 							id: true,
 							name: true,
 							type: true,
-							boardChannel: true,
-							threadChannel: true,
+							boardChannel: {
+								select: {
+									id: true,
+								},
+							},
+							threadChannel: {
+								select: {
+									id: true,
+								},
+							},
 						},
 					},
 				},
