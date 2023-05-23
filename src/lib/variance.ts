@@ -34,21 +34,20 @@ class Variance {
 
 		const result = [
 			this.always,
-			...Object.entries(this.createdVariants).map(
-				([variantType, variant]) => {
-					if (variantType in chosenVariants) {
-						const chosenVariantKey = chosenVariants[variantType];
-						if (chosenVariantKey in variant) {
-							return variant[chosenVariantKey];
-						} else {
-							throw new Error(
-								`Error: chosen variant key "${chosenVariantKey}" does not exist in variant type "${variantType}". File: variance.ts, Line: 50`
-							);
-						}
+			...Object.keys(this.createdVariants).map((variantType) => {
+				const variant = this.createdVariants[variantType];
+				if (variantType in chosenVariants) {
+					const chosenVariantKey = chosenVariants[variantType];
+					if (chosenVariantKey in variant) {
+						return variant[chosenVariantKey];
+					} else {
+						throw new Error(
+							`Error: chosen variant key "${chosenVariantKey}" does not exist in variant type "${variantType}". File: variance.ts, Line: 50`
+						);
 					}
-					return variant.default;
 				}
-			),
+				return variant.default;
+			}),
 		];
 
 		return twMerge(result.join(" "));
