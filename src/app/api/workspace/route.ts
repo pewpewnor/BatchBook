@@ -1,5 +1,5 @@
-import prisma from "@/lib/database/prisma";
-import { WorkspaceData } from "@/lib/database/workspace-type";
+import prisma from "@/lib/prisma";
+import { WorkspaceData } from "@/server/types/workspace-type";
 import createErrorMessage from "@/utils/error-message";
 import { NextRequest, NextResponse } from "next/server";
 import { assert } from "ts-essentials";
