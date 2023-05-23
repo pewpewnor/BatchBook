@@ -107,14 +107,16 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 
 				{isChannelSidebarOpen ? (
 					<div
-						className="absolute right-[-1.25rem] top-1/2 block rounded-2xl bg-black p-2 md:hidden"
+						className="absolute right-[-1.25rem] block rounded-2xl bg-black p-2"
+						style={{ top: "calc(50% - 2rem)" }}
 						onClick={toggleChannelSidebarCollapse}
 					>
 						<AiOutlineDoubleLeft />
 					</div>
 				) : (
 					<div
-						className="absolute left-2 top-1/2 block rounded-2xl bg-black p-2 md:hidden"
+						className="absolute left-2 block rounded-2xl bg-black p-2"
+						style={{ top: "calc(50% - 2rem)" }}
 						onClick={toggleChannelSidebarCollapse}
 					>
 						<AiOutlineDoubleRight />
