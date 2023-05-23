@@ -1,8 +1,8 @@
-import { Channel } from "@prisma/client";
+import { ChannelData } from "@/lib/database/workspace-type";
 import { Dispatch, SetStateAction, createContext } from "react";
 
 const SwitchChannelContext = createContext<
-	[Channel | null, Dispatch<SetStateAction<Channel>> | null]
+	[ChannelData | null, Dispatch<SetStateAction<ChannelData | null>> | null]
 >([null, null]);
 
 export default SwitchChannelContext;
