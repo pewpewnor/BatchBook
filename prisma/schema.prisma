@@ -13,15 +13,45 @@ model ThreadChannel {
   id        String @id @default(cuid())
   channelId String @unique
 
-  channel Channel @relation(fields: [channelId], references: [id])
+  channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 // TODO: BOARD SECTION
+
+model Label {
+  id     String @id @default(cuid())
+  text   String
+  color  String
+  cardId String
+
+  Card Card @relation(fields: [cardId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Card {
+  id       String @id @default(cuid())
+  title    String
+  sections Json?
+  pillarId String
+
+  labels Label[]
+  Pillar Pillar  @relation(fields: [pillarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Pillar {
+  id             String @id @default(cuid())
+  title          String
+  boardChannelId String
+
+  cards        Card[]
+  BoardChannel BoardChannel @relation(fields: [boardChannelId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
 model BoardChannel {
   id        String @id @default(cuid())
   channelId String @unique
 
-  channel Channel @relation(fields: [channelId], references: [id])
+  pillars Pillar[]
+  channel Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 // CHANNEL SECTION
@@ -37,9 +67,9 @@ model Channel {
   type             ChannelType
   channelSectionId String
 
-  channelSection ChannelSection @relation(fields: [channelSectionId], references: [id])
   boardChannel   BoardChannel?
   threadChannel  ThreadChannel?
+  channelSection ChannelSection @relation(fields: [channelSectionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   // Maybe for later features once error message box is added:
   // @@unique([channelSectionId, name, type])
@@ -50,28 +80,28 @@ model ChannelSection {
   name        String
   workspaceId String
 
-  workspace Workspace @relation(fields: [workspaceId], references: [id])
   channels  Channel[]
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 // WORKSPACE SECTION
 
 model Workspace {
-  id             String @id @default(cuid())
-  name           String
-  workspaceImage Bytes?
-  ownerId        String
+  id                   String    @id @default(cuid())
+  name                 String
+  workspaceImage       Bytes?
+  ownerId              String
+  inviteId             String?   @unique
+  inviteExpirationDate DateTime?
 
-  owner           User             @relation("OwnedWorkspaces", fields: [ownerId], references: [id])
   channelSections ChannelSection[]
+  owner           User             @relation("OwnedWorkspaces", fields: [ownerId], references: [id], onUpdate: Cascade)
   members         User[]           @relation("MemberWorkspaces")
 }
 
 // CLIENT SECTION
 
 model User {
-  inviteId String @unique @default(cuid())
-
   ownedWorkspaces  Workspace[] @relation("OwnedWorkspaces")
   memberWorkspaces Workspace[] @relation("MemberWorkspaces")
 
