@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import "server-only";
+// import "server-only";
 
 let prisma: PrismaClient;
 
