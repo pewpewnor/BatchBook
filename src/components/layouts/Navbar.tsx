@@ -20,7 +20,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
 	return (
 		<nav className="absolute top-0 w-screen flex-col bg-black">
-			<div className="flex h-12 items-center justify-around">
+			<div className="flex h-12 items-center justify-between px-8">
 				{/* Logo container */}
 				<div className="logo flex items-center justify-between gap-x-3">
 					<Image
@@ -36,6 +36,12 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 				<div className="hidden md:block">
 					<div className="links flex items-center justify-between gap-x-12 lg:gap-x-14">
 						<Link
+							href="/"
+							className="font-bold hover:text-slate-400"
+						>
+							Home
+						</Link>
+						<Link
 							href="/workspaces"
 							className="font-bold hover:text-slate-400"
 						>
@@ -43,10 +49,6 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 						</Link>
 					</div>
 				</div>
-
-				<SearchBar />
-
-				<BsFillPlusSquareFill className="mr-2 h-5 w-5 md:h-6 md:w-6" />
 
 				<FaBars
 					className="block h-6 w-6 cursor-pointer active:fill-slate-300 md:hidden"
@@ -62,6 +64,12 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 			{/* Dropdown navbar menu for mobile responsive view */}
 			{showNavbarDropdown && (
 				<div className="absolute right-4 z-10 mt-2 w-48 rounded-md bg-shade-blue bg-opacity-75 py-2 shadow-lg backdrop-blur-lg">
+					<Link
+						href="/"
+						className="block border-b-2 border-black px-4 py-4 text-sm text-slate-100 active:bg-light-shade-blue"
+					>
+						Home
+					</Link>
 					<Link
 						href="/workspaces"
 						className="block border-b-2 border-black px-4 py-4 text-sm text-slate-100 active:bg-light-shade-blue"
