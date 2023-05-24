@@ -4,6 +4,8 @@ coverage
 
 # dependencies
 /node_modules
+/npm-packages-offline-cache
+.yarnrc
 /.pnp
 .pnp.js
 
