@@ -24,7 +24,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	);
 
 	const workspaceQuery = useQuery<WorkspaceData | null>(
-		["workspace", props.params.workspaceId],
+		["workspacepage", props.params.workspaceId],
 		async () => {
 			console.log("fetching workspace...");
 			return await getWorkspaceData(props.params.workspaceId);
