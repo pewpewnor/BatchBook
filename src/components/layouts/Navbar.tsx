@@ -19,18 +19,16 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
 	return (
 		<nav className="absolute top-0 w-screen flex-col bg-black">
-			<div className="flex h-14 items-center justify-around">
+			<div className="flex h-12 items-center justify-around">
 				{/* Logo container */}
 				<div className="logo flex items-center justify-between gap-x-3">
 					<Image
 						src="/batchbook-logo.svg"
-						width="36"
-						height="36"
+						width="32"
+						height="32"
 						alt="logo"
 					/>
-					<h1 className="select-none text-2xl font-bold">
-						BatchBook
-					</h1>
+					<h1 className="select-none text-xl font-bold">BatchBook</h1>
 				</div>
 
 				{/* Navigation links */}
@@ -41,18 +39,6 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 							className="font-bold hover:text-slate-400"
 						>
 							Workspaces
-						</Link>
-						<Link
-							href="/messages"
-							className="font-bold hover:text-slate-400"
-						>
-							Messages
-						</Link>
-						<Link
-							href="/tasks"
-							className="font-bold hover:text-slate-400"
-						>
-							Tasks
 						</Link>
 					</div>
 				</div>
@@ -66,7 +52,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
 				{/* Right bar */}
 				<div className="flex justify-between align-middle">
-					<MdAccountBox className="h-9 w-9 cursor-pointer" />
+					<MdAccountBox className="h-8 w-8 cursor-pointer" />
 				</div>
 			</div>
 
