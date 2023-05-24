@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useState } from "react";
+import { BsFillPlusSquareFill } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
 import { MdAccountBox } from "react-icons/md";
 import SearchBar from "../ui/SearchBar";
@@ -44,6 +45,8 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 				</div>
 
 				<SearchBar />
+
+				<BsFillPlusSquareFill className="mr-2 h-6 w-6" />
 
 				<FaBars
 					className="block h-6 w-6 cursor-pointer active:fill-slate-300 md:hidden"
