@@ -1,6 +1,7 @@
 "use server";
 import prisma from "@/lib/prisma";
 import { BoardChannelData } from "@/types/boardpage-type";
+import Status from "@/types/status-type";
 import { assert } from "ts-essentials";
 
 async function getBoardChannelData(boardChannelId: string) {
@@ -31,4 +32,19 @@ async function getBoardChannelData(boardChannelId: string) {
 	return boardChannel;
 }
 
-export { getBoardChannelData };
+async function createPillar(boardChannelId: string, title: string) {
+	try {
+		await prisma.pillar.create({
+			data: {
+				title: title,
+				boardChannelId: boardChannelId,
+			},
+		});
+		return Status.OK;
+	} catch (err) {
+		console.error(err);
+	}
+	return Status.ERROR;
+}
+
+export { getBoardChannelData, createPillar };
