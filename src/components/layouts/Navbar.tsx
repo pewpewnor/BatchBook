@@ -68,18 +68,6 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 					>
 						Workspaces
 					</Link>
-					<Link
-						href="/messages"
-						className="block border-b-2 border-black px-4 py-4 text-sm text-slate-100 active:bg-light-shade-blue"
-					>
-						Messages
-					</Link>
-					<Link
-						href="/tasks"
-						className="block px-4 py-4 text-sm text-slate-100 active:bg-light-shade-blue"
-					>
-						Tasks
-					</Link>
 				</div>
 			)}
 		</nav>
