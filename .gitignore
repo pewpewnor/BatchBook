@@ -2,6 +2,7 @@
 /node_modules
 /npm-packages-offline-cache
 .yarnrc
+.saved.yarnrc
 /.pnp
 .pnp.js
 
