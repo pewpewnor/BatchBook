@@ -46,7 +46,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
 				<SearchBar />
 
-				<BsFillPlusSquareFill className="mr-2 h-6 w-6" />
+				<BsFillPlusSquareFill className="mr-2 h-5 w-5 md:h-6 md:w-6" />
 
 				<FaBars
 					className="block h-6 w-6 cursor-pointer active:fill-slate-300 md:hidden"
