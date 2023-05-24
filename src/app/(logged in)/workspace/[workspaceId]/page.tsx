@@ -26,7 +26,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	const workspaceQuery = useQuery<WorkspaceData | null>(
 		["workspacepage", props.params.workspaceId],
 		async () => {
-			console.log("fetching workspace...");
+			console.log("fetching workspace page...");
 			return await getWorkspaceData(props.params.workspaceId);
 		},
 		{
@@ -42,7 +42,7 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 		setIsChannelSidebarOpen((prev) => !prev);
 	};
 
-	if (workspaceQuery.isLoading || workspaceQuery.isFetching) {
+	if (workspaceQuery.isLoading) {
 		return (
 			<div className="flex h-full items-center justify-center">
 				<LoadingSpinner />
@@ -54,7 +54,11 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 	if (workspaceQuery.isError) {
 		return (
 			<div className="flex h-full items-center justify-center">
-				<p className="text-xl">Error While Fetching Data</p>
+				<p className="text-xl">
+					Error While Fetching Data
+					<br />
+					The system must be having a problem.
+				</p>
 			</div>
 		);
 	}
@@ -123,7 +127,9 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 						</p>
 					</div>
 				) : currentChannel.boardChannel ? (
-					<BoardView />
+					<BoardView
+						boardChannelId={currentChannel.boardChannel.id}
+					/>
 				) : currentChannel.threadChannel ? (
 					<ThreadView />
 				) : (
@@ -133,7 +139,6 @@ const Workspace: FC<WorkspaceProps> = (props: WorkspaceProps) => {
 						</p>
 					</div>
 				)}
-				{/* <pre>{JSON.stringify(workspaceQuery.data, null, 2)}</pre> */}
 			</div>
 		</div>
 	);
