@@ -4,6 +4,7 @@ import { BoardChannelData } from "@/types/boardpage-type";
 import { notFound } from "next/navigation";
 import { FC } from "react";
 import { useQuery } from "react-query";
+import WorkBar from "../WorkBar";
 
 interface BoardViewProps {
 	boardChannelId: string;
@@ -44,10 +45,13 @@ const BoardView: FC<BoardViewProps> = (props: BoardViewProps) => {
 	}
 
 	return (
-		<div>
-			BoardView Data:
-			<pre>{JSON.stringify(boardViewQuery.data, null, 2)}</pre>
-		</div>
+		<>
+			<WorkBar />
+			<div className="px-4 py-2">
+				BoardView Data:
+				<pre>{JSON.stringify(boardViewQuery.data, null, 2)}</pre>
+			</div>
+		</>
 	);
 };
 
