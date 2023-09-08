@@ -2,8 +2,9 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import { getBoardChannelData } from "@/servacts/boardview";
 import { BoardChannelData } from "@/types/boardpage-type";
 import { notFound } from "next/navigation";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useQuery } from "react-query";
+import AddPillarModal from "../AddPillarModal";
 import WorkBar from "../WorkBar";
 
 interface BoardViewProps {
@@ -11,6 +12,8 @@ interface BoardViewProps {
 }
 
 const BoardView: FC<BoardViewProps> = (props: BoardViewProps) => {
+	const [showAddModal, setShowAddModal] = useState(false);
+
 	const boardViewQuery = useQuery<BoardChannelData | null>(
 		["boardview", props.boardChannelId],
 		async () => {
@@ -46,10 +49,22 @@ const BoardView: FC<BoardViewProps> = (props: BoardViewProps) => {
 
 	return (
 		<>
-			<WorkBar />
+			<WorkBar
+				handleAddClicked={() => {
+					setShowAddModal((prev) => !prev);
+				}}
+			/>
 			<div className="px-4 py-2">
 				BoardView Data:
 				<pre>{JSON.stringify(boardViewQuery.data, null, 2)}</pre>
+				{/* Create Pillar Modal */}
+				{showAddModal && (
+					<AddPillarModal
+						handleCloseClicked={() => {
+							setShowAddModal(false);
+						}}
+					/>
+				)}
 			</div>
 		</>
 	);
